@@ -1,4 +1,5 @@
-import { Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseBoolPipe, ParseIntPipe, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
+import { CreatePropertyDto } from './dto/createProperty.dto';
 
 @Controller('property')
 export class PropertyController {
@@ -8,12 +9,30 @@ export class PropertyController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
+  findOne(@Param('id', ParseIntPipe) id, @Query('sort', ParseBoolPipe) sort) {
     return 'One property';
   }
 
   @Post()
-  create() {
+  create(@Body(
+    new ValidationPipe({ 
+      whitelist: true, 
+      forbidNonWhitelisted: true, 
+      groups: ['create'],
+    })
+  ) body: CreatePropertyDto) {
+    return 'Create property';
+  }
+
+  @Patch()
+  update(@Body(
+    new ValidationPipe({ 
+      whitelist: true, 
+      forbidNonWhitelisted: true, 
+      groups: ['update'],
+      always: true,
+    })
+  ) body: CreatePropertyDto) {
     return 'Create property';
   }
 }
