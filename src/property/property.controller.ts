@@ -27,8 +27,6 @@ export class PropertyController {
   @Patch()
   update(@Body(
     new ValidationPipe({ 
-      whitelist: true, 
-      forbidNonWhitelisted: true, 
       groups: ['update'],
       always: true,
     })
