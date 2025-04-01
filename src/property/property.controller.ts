@@ -27,7 +27,7 @@ export class PropertyController {
 
   @Patch(':id')
   update(
-    @Param() param: IdParamDto,
+    @Param("id", ParseIntPipe) id,
     @Body() body: CreatePropertyDto
   ) {
     return 'Create property';
