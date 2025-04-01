@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Param, ParseBoolPipe, ParseIntPipe, Patch, Post, Query, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CreatePropertyDto } from './dto/createProperty.dto';
+import { IdParamDto } from './dto/idParam.dto';
 
 @Controller('property')
 export class PropertyController {
@@ -24,13 +25,11 @@ export class PropertyController {
     return 'Create property';
   }
 
-  @Patch()
-  update(@Body(
-    new ValidationPipe({ 
-      groups: ['update'],
-      always: true,
-    })
-  ) body: CreatePropertyDto) {
+  @Patch(':id')
+  update(
+    @Param() param: IdParamDto,
+    @Body() body: CreatePropertyDto
+  ) {
     return 'Create property';
   }
 }
