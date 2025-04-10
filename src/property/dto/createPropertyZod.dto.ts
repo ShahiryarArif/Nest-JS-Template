@@ -4,7 +4,7 @@ export const createPropertySchema = z
 .object({
   name: z.string(),
   description: z.string().min(5),
-  area: z.number().positive(),
+  price: z.number().default(0),
 })
 .required();
 
