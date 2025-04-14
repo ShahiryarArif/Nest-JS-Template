@@ -1,6 +1,7 @@
-import { Column, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Property } from "./property.entity";
 
+@Entity()
 export class PropertyFeature {
   @PrimaryGeneratedColumn()
   id: number;
