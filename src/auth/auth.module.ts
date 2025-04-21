@@ -6,14 +6,12 @@ import { LocalStrategy } from './strategies/local.strategy';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from 'src/entities/user.entity';
 import { JwtModule } from '@nestjs/jwt';
+import jwtConfig from './config/jwt.config';
 
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]), 
-    JwtModule.register({
-      secret: process.env.JWT_SECRET,
-      signOptions: { expiresIn: '1d' },
-    }),
+    JwtModule.registerAsync(jwtConfig.asProvider()),
   ],
   controllers: [AuthController],
   providers: [AuthService, UserService, LocalStrategy],
