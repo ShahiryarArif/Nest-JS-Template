@@ -11,10 +11,6 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post('login')
   async login(@Request() req: any) {
-    const token = this.authService.login(req.user.id);
-    return {
-      id: req.user.id,
-      token,
-    };
+    return this.authService.login(req.user.id);
   }
 }
